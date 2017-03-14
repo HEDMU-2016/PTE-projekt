@@ -1,6 +1,11 @@
-package presentation;
+package observers;
 
 import javafx.scene.control.TextField;
+import presentation.FrontPage;
+import presentation.FrontPageMediator;
+import presentation.HorizontalAngleTextField;
+import presentation.TriangleDrawer;
+import presentation.VerticalAngleTextField;
 
 public class AngleObserver {
 	FrontPageMediator frontPageMediator;
@@ -59,7 +64,7 @@ public class AngleObserver {
 				return false;
 			}
 			if(input.contains(",")){
-				input.replace(",", ".");
+				input = input.replace(",", ".");
 			}
 			
 			// TODO : hvis input indeholder komma, skal komma omskrives til

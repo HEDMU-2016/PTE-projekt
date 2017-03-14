@@ -1,18 +1,30 @@
 package presentation;
 
-import domain.Beregning;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import logic.PTEObserver;
+import logic.PTEObserverImpl;
 
 public class FrontPageMediator {
 	FrontPageTopLeftInsetter frontPageTopLeft;
-	FrontPageBottomInsetter frontPageButtom;
+	FrontPageBottomInsetter frontPageBottom;
+	PTEObserverImpl pteObs = new PTEObserverImpl(this);
 	
-	public FrontPageMediator(FrontPageTopLeftInsetter frontPageTopLeft,FrontPageBottomInsetter frontPageButtom){
-		this.frontPageTopLeft=frontPageTopLeft;
-		this.frontPageButtom=frontPageButtom;
+	public FrontPageMediator(FrontPageTopLeftInsetter frontPageTopLeft, FrontPageBottomInsetter frontPageBottom) {
+		this.frontPageTopLeft = frontPageTopLeft;
+		this.frontPageBottom = frontPageBottom;
+	}
+	public PTEObserverImpl getObserver(){
+		return pteObs;
+	}
+	public TextField getFtTextField() {
+		return frontPageBottom.getFtTextField();
+	}
+	
+	public TextField getFnTextField() {
+		return frontPageBottom.getFnTextField();
 	}
 
 	public TextField getVerticalAngleText() {
@@ -23,29 +35,35 @@ public class FrontPageMediator {
 		return frontPageTopLeft.getHorizontalAngle();
 	}
 
-	public TextField getWeightValueText() {
-		return frontPageTopLeft.getWeightValue();
+	public TextField getWeightValueTextField() {
+		return frontPageTopLeft.getWeightValueHBox().getWeightTextField();
 	}
 
-	public ComboBox<String> getWeightUnit() {
-		return frontPageTopLeft.getWeightUnit();
+	public ComboBox<String> getWeightUnitComboBox() {
+		return frontPageTopLeft.getWeightValueHBox().getUnit();
 	}
 
-	public TableView<Beregning> getTable() {
-		return frontPageButtom.getBeregningsTable();
-	}
-	public Canvas getTriangle(){
+	public Canvas getTriangle() {
 		return frontPageTopLeft.getTriangle();
 	}
+
+	public TextField getFdimTextField() {
+		return frontPageBottom.getFdimTextField();
+	}
+	public TextArea getMellemRegninger(){
+		return frontPageBottom.getMellemRegninger();
+	}
 	
-	
-	public void setTriangle(Canvas triangle){
+	public void setTriangle(Canvas triangle) {
 		frontPageTopLeft.setTriangle(triangle);
 	}
-	public void setHorizontalAngleText(TextField tf){
+
+	public void setHorizontalAngleText(TextField tf) {
 		frontPageTopLeft.setHorizontalAngle(tf);
 	}
-	public void setVerticalAngleText(TextField tf){
+
+	public void setVerticalAngleText(TextField tf) {
 		frontPageTopLeft.setVerticalAngle(tf);
 	}
+
 }

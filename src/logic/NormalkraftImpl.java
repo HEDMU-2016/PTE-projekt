@@ -4,31 +4,43 @@ public class NormalkraftImpl implements Normalkraft {
 	
 	private Vinkel vinkel;
 	private Dimensionerendekraft fdim;
+	public String mellemRegning;
 	
-
-	public void angivDimensionerendekraft(Dimensionerendekraft fdim) throws DimensionerendekraftEjDefineretException {
-
+	@Override
+	public void angivDimensionerendekraft(Dimensionerendekraft fdim) throws DimensionerendeKraftEjDefineretException {
+		if(fdim==null) 
+			throw new DimensionerendeKraftEjDefineretException();
+		this.fdim = fdim;
 	}
-
+	@Override
 	public void angivVinkel(Vinkel vinkel) throws VinkelEjDefineretException {
-
+		if(vinkel==null) 
+			throw new VinkelEjDefineretException();
+		this.vinkel = vinkel;
 	}
 
-	public double getNewton() throws DimensionerendekraftEjDefineretException, VinkelEjDefineretException {
+	public double getNewton() throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException {
 		double grader = vinkel.getGrader();
 		boolean erMaaltTilLodret = vinkel.getMaaltTilLodret();
 		double fdimNewton = fdim.getNewton();
 		double fnNewton = 0;
 		
 		if (erMaaltTilLodret) {
-			fnNewton = Math.cos(grader) * fdimNewton;
+			fnNewton = Math.sin(grader) * fdimNewton;
+			mellemRegning = "Fn = sin("+vinkel+") * "+fdimNewton;
 		}
 		
 		else {
-			fnNewton = Math.sin(grader) * fdimNewton;
+			fnNewton = Math.cos(grader) * fdimNewton;
+			mellemRegning = "Fn = cos("+vinkel+") * "+fdimNewton;
 		}
 		
 		return fnNewton;
+	}
+
+	@Override //TO DO
+	public String getMellemregning() {
+		return mellemRegning;
 	}
 
 }

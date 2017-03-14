@@ -5,7 +5,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class FrontPage {
-	static FrontPageMediator frontPageMediator; 
+	public static FrontPageMediator frontPageMediator; 
 
 	public void start(Stage stage) {
 		BorderPane root = new BorderPane();
@@ -18,10 +18,9 @@ public class FrontPage {
 		root.setLeft(fptInsetter.insetLeft());
 		root.setBottom(fpbInsetter.insetButtom());
 		
-		fptInsetter.weightValue.requestFocus();
 		frontPageMediator = new FrontPageMediator(fptInsetter,fpbInsetter);
 		
-		
+		frontPageMediator.getWeightValueTextField().requestFocus();
 		stage.setScene(frontPage);
 		stage.show();
 	}
