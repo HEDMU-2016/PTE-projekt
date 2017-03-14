@@ -1,5 +1,7 @@
 package logic;
 
+import exceptions.erUnderFejlgraenseException;
+
 public class PTECalculatorControllerImpl implements PTECalculatorController {
 
 	private Dimensionerendekraft fdim;
@@ -134,7 +136,7 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 	}
 
 	@Override
-	public void angivVinkel(double vinkel, boolean MaaltTilLodret) {
+	public void angivVinkel(double vinkel, boolean MaaltTilLodret) throws erUnderFejlgraenseException {
 		if(this.vinkel == null){
 			this.vinkel = new VinkelImpl();
 		}

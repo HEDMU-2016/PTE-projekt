@@ -1,5 +1,7 @@
 package logic;
 
+import exceptions.erUnderFejlgraenseException;
+
 public interface PTECalculatorController {
 
 	public void beregnNormalkraft() throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException;
@@ -16,7 +18,7 @@ public interface PTECalculatorController {
 
 	public double getVinkel() throws VinkelEjDefineretException;
 
-	public void angivVinkel(double vinkel, boolean maaltTilLodret);
+	public void angivVinkel(double vinkel, boolean maaltTilLodret) throws erUnderFejlgraenseException;
 
 	public void beregnTvaerkraft() throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException;
 

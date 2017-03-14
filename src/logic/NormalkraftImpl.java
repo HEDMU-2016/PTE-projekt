@@ -25,6 +25,7 @@ public class NormalkraftImpl implements Normalkraft {
 		double fdimNewton = fdim.getNewton();
 		double fnNewton = 0;
 		
+		
 		if (erMaaltTilLodret) {
 			fnNewton = Math.sin(grader) * fdimNewton;
 			mellemRegning = "Fn = sin("+vinkel+") * "+fdimNewton;

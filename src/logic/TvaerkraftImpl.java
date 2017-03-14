@@ -27,16 +27,16 @@ public class TvaerkraftImpl implements Tvaerkraft {
 		double grader = vinkel.getGrader();
 		boolean erMaaltTilLodret = vinkel.getMaaltTilLodret();
 		double fdimNewton = fdim.getNewton();
-		double ftNewton = 0;
+		double ftNewton;
 		
 		if (erMaaltTilLodret) {
 			ftNewton = Math.cosh(grader) * fdimNewton;
-			mellemregning = "FT = cos(vinkel) * FDim" + "\n" + ftNewton + " = cos(" + grader + ") * " + ftNewton; 
+			mellemregning = "FT = cos(vinkel) * FDim" + "\n" + ftNewton + " = cos(" + grader + ") * " + ftNewton + "\n"; 
 		}
 		
 		else {
 			ftNewton = Math.sinh(grader) * fdimNewton;
-			mellemregning = "FT = sin(vinkel) * FDim" + "\n" + ftNewton + " = sin(" + grader + ") * " + ftNewton; 
+			mellemregning = "FT = sin(vinkel) * FDim" + "\n" + ftNewton + " = sin(" + grader + ") * " + ftNewton + "\n"; 
 		}
 		
 		return ftNewton;

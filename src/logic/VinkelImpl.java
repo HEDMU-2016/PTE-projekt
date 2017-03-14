@@ -1,5 +1,7 @@
 package logic;
 
+import exceptions.erUnderFejlgraenseException;
+
 public class VinkelImpl implements Vinkel {
 
 	private double grader;
@@ -33,7 +35,10 @@ public class VinkelImpl implements Vinkel {
 	}
 
 	@Override
-	public void setGrader(double grader) {
-		this.grader = grader;
+	public void setGrader(double grader)throws erUnderFejlgraenseException {
+		if (grader<0) 
+			throw new erUnderFejlgraenseException();
+//		else if (0<this.grader && this.grader>90) 
+			this.grader = grader;
 	}
 }

@@ -1,10 +1,11 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.junit.internal.runners.statements.Fail;
 
+import exceptions.erUnderFejlgraenseException;
 import logic.DimensionerendeKraftEjDefineretException;
 import logic.Dimensionerendekraft;
 import logic.DimensionerendekraftImpl;
@@ -18,8 +19,8 @@ import logic.VinkelImpl;
 
 public class OC3Test {
 	
-	@Test
-	public void test0GraderGiverAdvarsel() {
+	@Test//(expected=erUnderFejlgraenseException.class)
+	public void test0GraderGiverAdvarsel() throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException, erUnderFejlgraenseException {
 		Normalkraft fn = new NormalkraftImpl();
 		Vinkel vinkel = new VinkelImpl();
 		Dimensionerendekraft fdim = new DimensionerendekraftImpl();
@@ -28,28 +29,37 @@ public class OC3Test {
 		vinkel.setMaaltTilLodret(false);
 		fdim.setKg(100);		
 		
+		fail("normalgrænse ej understøttet");
 		assertEquals(0, fn.getNewton() ,0.001);
-		assertTrue(vinkel.erUnderNormalgraense());
+//		assertTrue(vinkel.erUnderNormalgraense());
 		
 	}
 	
-	@Test
-	public void testNegativVinkelGrader(){
+	@Test(expected=erUnderFejlgraenseException.class)
+	public void testNegativVinkelGrader() throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException, erUnderFejlgraenseException{
 		Normalkraft fn = new NormalkraftImpl();
 		Vinkel vinkel = new VinkelImpl();
 		Dimensionerendekraft fdim = new DimensionerendekraftImpl();
-		
+		boolean godNewton = false;
 		vinkel.setGrader(-1);
 		vinkel.setMaaltTilLodret(false);
 		fdim.setKg(100);
+		double newton = fn.getNewton();
+		System.out.println(newton);
+		if(0<=newton){
+			godNewton = true;
+		}else{
+			godNewton = false;
+		}
 		
-		assertTrue(0<=fn.getNewton());
-		assertTrue(vinkel.erUnderFejlgraense);
+		assertTrue(godNewton);
+//		assertTrue(vinkel.erUnderFejlgraense);
+		fail("underFejlGrænse ej lavet");
 		
 	}
 	
 	@Test
-	public void testBeregningAfNormalkraftKorrekt(){
+	public void testBeregningAfNormalkraftKorrekt() throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException, erUnderFejlgraenseException{
 		Normalkraft fn = new NormalkraftImpl();
 		Vinkel vinkel = new VinkelImpl();
 		Dimensionerendekraft fdim = new DimensionerendekraftImpl();
@@ -57,13 +67,14 @@ public class OC3Test {
 		vinkel.setGrader(1);
 		vinkel.setMaaltTilLodret(false);
 		fdim.setKg(100);
-		
+		fn.angivDimensionerendekraft(fdim);
+		fn.angivVinkel(vinkel);
 		assertEquals(17.131, fn.getNewton(), 0.001);
 		
 	}
 
-	@Test
-	public void test90GraderGiverAdvarsel(){
+	@Test// 
+	public void test90GraderGiverAdvarsel() throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException, erUnderFejlgraenseException{
 		Normalkraft fn = new NormalkraftImpl();
 		Vinkel vinkel = new VinkelImpl();
 		Dimensionerendekraft fdim = new DimensionerendekraftImpl();
@@ -71,27 +82,31 @@ public class OC3Test {
 		vinkel.setGrader(90);
 		vinkel.setMaaltTilLodret(false);
 		fdim.setKg(100);
+		fn.angivDimensionerendekraft(fdim);
+		fn.angivVinkel(vinkel);
 		
 		assertEquals(981.450, fn.getNewton(), 0.001);
-		assertTrue(vinkel.erOverNormalgraense());
+//		assertTrue(vinkel.erOverNormalgraense());
+		fail("erOverNormalgrænse ej lavet");
 		
 	}
 	
-	@Test
-	public void testBogstavSomVinkelGrader(){
+	@Test// (expected=erUnderFejlgraenseException.class)
+	public void testBogstavSomVinkelGrader() throws erUnderFejlgraenseException{
 		Normalkraft fn = new NormalkraftImpl();
 		Vinkel vinkel = new VinkelImpl();
 		Dimensionerendekraft fdim = new DimensionerendekraftImpl();
 		
-		vinkel.setGrader(a);
+		vinkel.setGrader(Double.NaN);
 		vinkel.setMaaltTilLodret(false);
 		fdim.setKg(100);
 		
-		assertTrue(vinkel.fejlInput());
+//		assertTrue(vinkel.fejlInput());
+		fail("fejlInput ej lavet");
 	}
 	
 	@Test
-	public void testVinkelOverMaxgraense(){
+	public void testVinkelOverMaxgraense() throws erUnderFejlgraenseException{
 		Normalkraft fn = new NormalkraftImpl();
 		Vinkel vinkel = new VinkelImpl();
 		Dimensionerendekraft fdim = new DimensionerendekraftImpl();
@@ -101,10 +116,11 @@ public class OC3Test {
 		fdim.setKg(100);
 		
 		
-		assertTrue(vinkel.Overmaximalgraense);
+//		assertTrue(vinkel.Overmaximalgraense);
+		fail("overMaximalgrænse ej lavet");
 	}
 	@Test
-	public void testMaaltTilLodretkorrekt() throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException{
+	public void testMaaltTilLodretkorrekt() throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException, erUnderFejlgraenseException{
 		Normalkraft fn = new NormalkraftImpl();
 		Vinkel vinkel = new VinkelImpl();
 		Dimensionerendekraft fdim = new DimensionerendekraftImpl();
@@ -120,7 +136,7 @@ public class OC3Test {
 	}
 	
 	@Test
-	public void test45GraderSammenligningTilTvaerkraft() throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException{
+	public void test45GraderSammenligningTilTvaerkraft() throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException, erUnderFejlgraenseException{
 		Normalkraft fn = new NormalkraftImpl();
 		Tvaerkraft ft = new TvaerkraftImpl();
 		Vinkel vinkel = new VinkelImpl();
@@ -136,8 +152,8 @@ public class OC3Test {
 		assertEquals(ft.getNewton() , fn.getNewton(), 0.001);
 		
 	}
-	@Test
-	public void testvaegtSatTil0Kg(){
+	@Test //(expected=erUnderFejlgraenseException.class)
+	public void testvaegtSatTil0Kg() throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException, erUnderFejlgraenseException{
 		Normalkraft fn = new NormalkraftImpl();
 		Vinkel vinkel = new VinkelImpl();
 		Dimensionerendekraft fdim = new DimensionerendekraftImpl();
@@ -145,9 +161,12 @@ public class OC3Test {
 		vinkel.setGrader(45);
 		vinkel.setMaaltTilLodret(false);
 		fdim.setKg(100);
+		fn.angivDimensionerendekraft(fdim);
+		fn.angivVinkel(vinkel);
 		
 		assertEquals(0, fn.getNewton(), 0.001);
-		assertTrue(fdim.VaegtUnderNormalgraense);
+//		assertTrue(fdim.VaegtUnderNormalgraense);
+		fail("vægtUnderNormalgrænse ej lavet");
 	}
 	
 	
