@@ -5,11 +5,15 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import logic.DimensionerendeKraftEjDefineretException;
 import logic.Dimensionerendekraft;
 import logic.DimensionerendekraftImpl;
 import logic.Normalkraft;
 import logic.NormalkraftImpl;
+import logic.Tvaerkraft;
+import logic.TvaerkraftImpl;
 import logic.Vinkel;
+import logic.VinkelEjDefineretException;
 import logic.VinkelImpl;
 
 public class OC3Test {
@@ -100,7 +104,7 @@ public class OC3Test {
 		assertTrue(vinkel.Overmaximalgraense);
 	}
 	@Test
-	public void testMaaltTilLodretkorrekt(){
+	public void testMaaltTilLodretkorrekt() throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException{
 		Normalkraft fn = new NormalkraftImpl();
 		Vinkel vinkel = new VinkelImpl();
 		Dimensionerendekraft fdim = new DimensionerendekraftImpl();
@@ -108,22 +112,28 @@ public class OC3Test {
 		vinkel.setGrader(1);
 		vinkel.setMaaltTilLodret(true);
 		fdim.setKg(100);
+		fn.angivDimensionerendekraft(fdim);
+		fn.angivVinkel(vinkel);
+		double newton =fn.getNewton();
 		
-		assertEquals(981.45, fn.getNewton(), 0.001);
+		assertEquals(981.45, newton, 0.1);
 	}
 	
 	@Test
-	public void test45GraderSammenligningTilTvaerkraft(){
+	public void test45GraderSammenligningTilTvaerkraft() throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException{
 		Normalkraft fn = new NormalkraftImpl();
-		Tvearkraft ft = new TvaerkraftImpl();
+		Tvaerkraft ft = new TvaerkraftImpl();
 		Vinkel vinkel = new VinkelImpl();
 		Dimensionerendekraft fdim = new DimensionerendekraftImpl();
 		
 		vinkel.setGrader(45);
 		vinkel.setMaaltTilLodret(false);
 		fdim.setKg(100);
-		
-		assertEquals(ft.getNewton, fn.getNewton());
+		fn.angivDimensionerendekraft(fdim);
+		fn.angivVinkel(vinkel);
+		ft.angivDimensionerendekraft(fdim);
+		ft.angivVinkel(vinkel);
+		assertEquals(ft.getNewton() , fn.getNewton(), 0.001);
 		
 	}
 	@Test
