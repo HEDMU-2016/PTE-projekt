@@ -27,12 +27,12 @@ public class NormalkraftImpl implements Normalkraft {
 		
 		
 		if (erMaaltTilLodret) {
-			fnNewton = Math.sinh(grader) * fdimNewton;
+			fnNewton = Math.sin(grader) * fdimNewton;
 			mellemRegning = "Fn = sin("+vinkel+") * "+fdimNewton;
 		}
 		
 		else {
-			fnNewton = Math.cosh(grader) * fdimNewton;
+			fnNewton = Math.cos(grader) * fdimNewton;
 			mellemRegning = "Fn = cos("+vinkel+") * "+fdimNewton;
 		}
 		
