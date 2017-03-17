@@ -5,8 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.internal.runners.statements.Fail;
 
+import exceptions.DimensionerendeKraftEjDefineretException;
+import exceptions.VinkelEjDefineretException;
 import exceptions.erUnderFejlgraenseException;
-import logic.DimensionerendeKraftEjDefineretException;
 import logic.Dimensionerendekraft;
 import logic.DimensionerendekraftImpl;
 import logic.Normalkraft;
@@ -14,7 +15,6 @@ import logic.NormalkraftImpl;
 import logic.Tvaerkraft;
 import logic.TvaerkraftImpl;
 import logic.Vinkel;
-import logic.VinkelEjDefineretException;
 import logic.VinkelImpl;
 
 public class OC3Test {

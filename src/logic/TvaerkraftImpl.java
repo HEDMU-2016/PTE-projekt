@@ -1,5 +1,8 @@
 package logic;
 
+import exceptions.DimensionerendeKraftEjDefineretException;
+import exceptions.VinkelEjDefineretException;
+
 public class TvaerkraftImpl implements Tvaerkraft {
 	private Vinkel vinkel;
 	private Dimensionerendekraft fdim;
@@ -27,16 +30,19 @@ public class TvaerkraftImpl implements Tvaerkraft {
 		double grader = vinkel.getGrader();
 		boolean erMaaltTilLodret = vinkel.getMaaltTilLodret();
 		double fdimNewton = fdim.getNewton();
-		double ftNewton;
-		
-		if (erMaaltTilLodret) {
-			ftNewton = Math.cosh(grader) * fdimNewton;
-			mellemregning = "FT = cos(vinkel) * FDim" + "\n" + ftNewton + " = cos(" + grader + ") * " + ftNewton + "\n"; 
+
+		double ftNewton = 0;
+		double sinV = Math.sin(Math.toRadians(grader));
+		double cosV = Math.cos(Math.toRadians(grader));
+		if (erMaaltTilLodret==false) {
+			ftNewton = cosV * fdimNewton;
+			mellemregning = "FT = cos(vinkel) * FDim" + "\n" + ftNewton + " = cos(" + grader + ") * " + fdimNewton; 
 		}
 		
 		else {
-			ftNewton = Math.sinh(grader) * fdimNewton;
-			mellemregning = "FT = sin(vinkel) * FDim" + "\n" + ftNewton + " = sin(" + grader + ") * " + ftNewton + "\n"; 
+			ftNewton = sinV * fdimNewton;
+			mellemregning = "FT = sin(vinkel) * FDim" + "\n" + ftNewton + " = sin(" + grader + ") * " + fdimNewton; 
+
 		}
 		
 		return ftNewton;

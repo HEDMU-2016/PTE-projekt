@@ -8,6 +8,7 @@ public interface Dimensionerendekraft {
 	public void setMellemRegning(String mellemRegning);
 	public String getMellemRegning();
 	public static final double tyngdekraft = 9.816;
+	public double setNewton(double newton);
 	
 	
 }

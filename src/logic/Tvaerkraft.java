@@ -1,5 +1,8 @@
 package logic;
 
+import exceptions.DimensionerendeKraftEjDefineretException;
+import exceptions.VinkelEjDefineretException;
+
 public interface Tvaerkraft {
 
 	public String getMellemregning()throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException;

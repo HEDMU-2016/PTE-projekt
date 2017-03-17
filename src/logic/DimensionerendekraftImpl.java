@@ -6,6 +6,12 @@ public class DimensionerendekraftImpl implements Dimensionerendekraft {
 	double newton;
 	String mellemRegning;
 
+	@Override
+	public double setNewton(double newton) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	public double getNewton() {
 		return kg * tyngdekraft;
 	}
@@ -31,5 +37,4 @@ public class DimensionerendekraftImpl implements Dimensionerendekraft {
 	public String getMellemRegning() {
 		return mellemRegning;
 	}
-
 }

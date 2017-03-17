@@ -12,17 +12,18 @@ public class VinkelImpl implements Vinkel {
 
 	@Override
 	public double getGrader() {
-		if (getMaaltTilLodret()) {
-			graderMaaltTilLodret = grader;
-			graderMaaltTilVandret = 90 - grader;
-
-			return graderMaaltTilLodret;
-		} else {
-			graderMaaltTilVandret = grader;
-			graderMaaltTilLodret = 90 - grader;
-
-			return graderMaaltTilVandret;
-		}
+		return grader;
+//		if (getMaaltTilLodret()) {
+//			graderMaaltTilLodret = grader;
+//			graderMaaltTilVandret = 90 - grader;
+//
+//			return graderMaaltTilLodret;
+//		} else {
+//			graderMaaltTilVandret = grader;
+//			graderMaaltTilLodret = 90 - grader;
+//
+//			return graderMaaltTilVandret;
+//		}
 	}
 
 	@Override

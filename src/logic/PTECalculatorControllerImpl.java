@@ -1,5 +1,9 @@
 package logic;
 
+import exceptions.DimensionerendeKraftEjDefineretException;
+import exceptions.NormalkraftEjDefineretException;
+import exceptions.TvaerkraftEjDefineretException;
+import exceptions.VinkelEjDefineretException;
 import exceptions.erUnderFejlgraenseException;
 
 public class PTECalculatorControllerImpl implements PTECalculatorController {
@@ -71,7 +75,7 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 	}
 
 	@Override
-	public void notifyObservers() {
+	public void notifyObservers() throws DimensionerendeKraftEjDefineretException {
 
 		if (observer != null) {
 			observer.update();
@@ -136,7 +140,7 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 	}
 
 	@Override
-	public void angivVinkel(double vinkel, boolean MaaltTilLodret) throws erUnderFejlgraenseException {
+	public void angivVinkel(double vinkel, boolean MaaltTilLodret) throws erUnderFejlgraenseException, DimensionerendeKraftEjDefineretException {
 		if(this.vinkel == null){
 			this.vinkel = new VinkelImpl();
 		}
@@ -166,9 +170,17 @@ public class PTECalculatorControllerImpl implements PTECalculatorController {
 		
 	}
 	@Override
-	public Dimensionerendekraft getDimensionerendekraft() {
-		
-		return fdim;
+	public double getDimensionerendekraft() throws DimensionerendeKraftEjDefineretException {
+		if(fdim == null)
+			throw new DimensionerendeKraftEjDefineretException();
+		return fdim.getNewton();
+	}
+
+	@Override
+	public String getDimensionerendekraftMellemregning() throws DimensionerendeKraftEjDefineretException {
+		if(fdim == null)
+			throw new DimensionerendeKraftEjDefineretException();
+		return fdim.getMellemRegning();
 	}
 
 }

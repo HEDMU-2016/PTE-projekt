@@ -1,5 +1,8 @@
 package logic;
 
+import exceptions.DimensionerendeKraftEjDefineretException;
+import exceptions.VinkelEjDefineretException;
+
 public interface Normalkraft {
  
 	public void angivDimensionerendekraft(Dimensionerendekraft fdim) throws DimensionerendeKraftEjDefineretException;

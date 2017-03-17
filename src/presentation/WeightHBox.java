@@ -3,11 +3,11 @@ package presentation;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.DimensionerendeKraftEjDefineretException;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import logic.DimensionerendeKraftEjDefineretException;
 import logic.PTECalculatorController;
 import logic.PTECalculatorControllerImpl;
 import logic.UnitConverter;

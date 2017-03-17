@@ -14,7 +14,6 @@ public class FrontPage {
 		FrontPageTopLeftInsetter fptInsetter = new FrontPageTopLeftInsetter();
 		FrontPageBottomInsetter fpbInsetter = new FrontPageBottomInsetter();
 		
-		//indsætter grids i borderpane
 		root.setLeft(fptInsetter.insetLeft());
 		root.setBottom(fpbInsetter.insetButtom());
 		

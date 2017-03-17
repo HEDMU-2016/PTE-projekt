@@ -1,5 +1,9 @@
 package logic;
 
+import exceptions.DimensionerendeKraftEjDefineretException;
+import exceptions.NormalkraftEjDefineretException;
+import exceptions.TvaerkraftEjDefineretException;
+import exceptions.VinkelEjDefineretException;
 import exceptions.erUnderFejlgraenseException;
 
 public interface PTECalculatorController {
@@ -14,11 +18,11 @@ public interface PTECalculatorController {
 
 	public void angivVaegt(double Kg) throws DimensionerendeKraftEjDefineretException;
 
-	public void notifyObservers();
+	public void notifyObservers() throws DimensionerendeKraftEjDefineretException;
 
 	public double getVinkel() throws VinkelEjDefineretException;
 
-	public void angivVinkel(double vinkel, boolean maaltTilLodret) throws erUnderFejlgraenseException;
+	public void angivVinkel(double vinkel, boolean maaltTilLodret) throws erUnderFejlgraenseException, DimensionerendeKraftEjDefineretException;
 
 	public void beregnTvaerkraft() throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException;
 
@@ -30,6 +34,8 @@ public interface PTECalculatorController {
 
 	public void tilmeldObserver(PTEObserver observer);
 	
-	public Dimensionerendekraft getDimensionerendekraft();
+	public double getDimensionerendekraft() throws DimensionerendeKraftEjDefineretException;
+
+	public String getDimensionerendekraftMellemregning() throws DimensionerendeKraftEjDefineretException;
 
 }
