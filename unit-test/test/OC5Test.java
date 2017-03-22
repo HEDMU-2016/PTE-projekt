@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import exceptions.ArealEjDefineretException;
 import exceptions.DimensionerendeKraftEjDefineretException;
+import exceptions.ErOverFejlGraenseException;
 import exceptions.NegativArealException;
 import exceptions.NormalkraftEjDefineretException;
 import exceptions.NormalspaendingEjDefineretException;
@@ -23,7 +24,7 @@ import logic.VinkelImpl;
 public class OC5Test {
 	
 	@Test
-	public void testBeregnSigmaNMedMellemregning() throws DimensionerendeKraftEjDefineretException, VinkelEjDefineretException, erUnderFejlgraenseException, NegativArealException, NormalspaendingEjDefineretException {
+	public void testBeregnSigmaNMedMellemregning() throws DimensionerendeKraftEjDefineretException, ErOverFejlGraenseException, VinkelEjDefineretException, erUnderFejlgraenseException, NegativArealException, NormalspaendingEjDefineretException {
 		Normalkraft fn = new NormalkraftImpl();
 		Normalspaending sigmaN = new NormalspaendingImpl();
 		Areal a = new ArealImpl();
@@ -39,7 +40,7 @@ public class OC5Test {
 	}
 	
 	@Test(expected=ArealEjDefineretException.class)
-	public void sigmaArealEjDefineretException() throws ArealEjDefineretException, erUnderFejlgraenseException{
+	public void sigmaArealEjDefineretException() throws ArealEjDefineretException, ErOverFejlGraenseException, erUnderFejlgraenseException{
 		Normalkraft fn = new NormalkraftImpl();
 		Vinkel vinkel = new VinkelImpl();
 		
@@ -51,7 +52,7 @@ public class OC5Test {
 	}
 	
 	@Test(expected=NormalkraftEjDefineretException.class)
-	public void sigmaNewtonEjDefineretException() throws NormalkraftEjDefineretException, erUnderFejlgraenseException, NegativArealException{
+	public void sigmaNewtonEjDefineretException() throws NormalkraftEjDefineretException, ErOverFejlGraenseException, erUnderFejlgraenseException, NegativArealException{
 		Areal a = new ArealImpl();
 		Vinkel vinkel = new VinkelImpl();
 		

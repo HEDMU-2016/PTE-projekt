@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import exceptions.DimensionerendeKraftEjDefineretException;
+import exceptions.ErOverFejlGraenseException;
 import exceptions.VinkelEjDefineretException;
 import exceptions.VinkelErNaNException;
 import exceptions.erUnderFejlgraenseException;
@@ -22,7 +23,7 @@ import logic.VinkelImpl;
 public class OC4Test {
 
 	@Test
-	public void testKorrektUdregningAfTvaersKraft() throws erUnderFejlgraenseException, DimensionerendeKraftEjDefineretException, VinkelEjDefineretException {
+	public void testKorrektUdregningAfTvaersKraft() throws erUnderFejlgraenseException, DimensionerendeKraftEjDefineretException, VinkelEjDefineretException, ErOverFejlGraenseException {
 		VinkelMock vinkelMock = new VinkelMock();
 		DimensionerendekraftMock fdimMock = new DimensionerendekraftMock();
 		Tvaerkraft ft = new TvaerkraftImpl();
@@ -37,7 +38,7 @@ public class OC4Test {
 		assertEquals(409.576,ft.getNewton(), 0.001);
 	}
 	@Test (expected = erUnderFejlgraenseException.class)
-	public void testVinkelErNaN() throws erUnderFejlgraenseException {
+	public void testVinkelErNaN() throws erUnderFejlgraenseException, ErOverFejlGraenseException {
 		Vinkel vinkel = new VinkelImpl();
 
 		vinkel.setGrader(Double.NaN);
@@ -53,7 +54,7 @@ public class OC4Test {
 		fail("VaegtErIkkeAngivetFejl Exception Ej Lavet");
 	}
 	@Test
-	public void testUdregningAfTvaerkraft() throws erUnderFejlgraenseException, DimensionerendeKraftEjDefineretException, VinkelEjDefineretException {
+	public void testUdregningAfTvaerkraft() throws erUnderFejlgraenseException, ErOverFejlGraenseException, DimensionerendeKraftEjDefineretException, VinkelEjDefineretException {
 		Vinkel vinkelMock = new VinkelMock();
 		Dimensionerendekraft fdimMock = new DimensionerendekraftMock();
 		Tvaerkraft ft = new TvaerkraftImpl();
